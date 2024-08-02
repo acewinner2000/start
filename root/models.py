@@ -1,21 +1,118 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class service(models.Model):
-    name1 = models.CharField(max_length=100,default="برای سرویس هااین فیلد را پر کنید")
-    content1 = models.TextField(default="برای سرویس هااین فیلد را پر کنید")  
-    
-    created_at1 = models.DateTimeField(auto_now_add=True)
-    updated_at1 = models.DateTimeField(auto_now=True)
-    status= models.BooleanField(default=False)
+
+
+class Services(models.Model):
+
+    name = models.CharField(max_length=120)
+    content = models.TextField(default="test service")
+    status = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     def __str__(self):
-        return self.name1
-class so(models.Model):   
-    name2 = models.CharField(max_length=100,default="برای سرویس های ویژه این فیلد را پر کنید")
-    content2 = models.TextField(default="برای سرویس های ویژه این فیلد را پر کنید.")  
+        return self.name
     
-    created_at2 = models.DateTimeField(auto_now_add=True)
-    updated_at2 = models.DateTimeField(auto_now=True)
-    status= models.BooleanField(default=False)
+    class Meta:
+        ordering = ("created_at",)
     
+
+
+class ask(models.Model):
+
+    name = models.CharField(max_length=120)
+    content = models.TextField(default="test ask")
+    status = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     def __str__(self):
-        return self.name2
+        return self.name
+    
+    class Meta:
+        ordering = ("created_at",)
+
+class Skills(models.Model):
+    name = models.CharField(max_length=120)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+        
+    class Meta:
+        ordering = ("created_at",)
+
+
+    def __str__(self):
+        return self.name
+
+
+
+
+class Trainers(models.Model):
+    user = models.ForeignKey(User , on_delete=models.CASCADE)
+    image = models.ImageField(upload_to= "trainers" , default="static\img\hero-bg-light.webp")
+    skills = models.ManyToManyField(Skills)
+    content = models.TextField()
+    status = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    
+    class Meta:
+        ordering = ("created_at",)
+
+
+    def __str__(self):
+        return self.user.username
+
+
+
+class SpecialServices(models.Model):
+    name = models.CharField(max_length=120)
+    content = models.TextField(default="no content")
+    status = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        ordering = ("created_at",)
+
+
+
+
+class Property(models.Model):
+    name = models.TextField(default='test')
+    status = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        ordering = ("created_at",)
+
+
+
+
+class Pricing(models.Model):
+    
+    name = models.CharField(max_length=120)
+    content = models.TextField(default="test")
+    fee = models.FloatField(default=0)
+    questions = models.ManyToManyField(Property)
+    status = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        ordering = ("created_at",)
+

@@ -1,8 +1,14 @@
 from django.urls import path
-from .views import sp
-from .views import home
+from .views import *
+
 urlpatterns = [
+    path('', home),
+    path('#about',about),
+    path('#features',about),
+    path('#hero',about),
+    path('#services',about),
+    path('#pricing',about),
+    path('#contact',about),
     
-    path ('',home),
-    path('',sp)
+
 ]
