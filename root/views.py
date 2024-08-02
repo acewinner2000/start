@@ -7,5 +7,5 @@ def home(request):
     return render(request,'root/index.html',context={'service':ser})
 
 def sp(request):
-    so=so.objects.filter(status2=True)
+    so=so.objects.filter(status=True)
     return render(request,'root/index.html',context={'so':so})
