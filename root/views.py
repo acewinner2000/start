@@ -20,3 +20,6 @@ def home(request):
 def about(request):
     pass
 
+def login(request):
+    
+    return render(request, 'root/login.html')
